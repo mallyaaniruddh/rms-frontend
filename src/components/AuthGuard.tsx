@@ -10,16 +10,14 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   try {
     const { exp }: { exp: number } = jwtDecode(token);
 
-    // If expired, force logout
     if (exp * 1000 <= Date.now()) {
-      localStorage.removeItem("token");
+      localStorage.removeItem("token"); // Remove expired token
       return <Navigate to="/login" />;
     }
 
     return <>{children}</>;
-  } catch (error) {
-    console.error("Invalid Token:", error);
-    localStorage.removeItem("token"); // Remove corrupted token
+  } catch {
+    localStorage.removeItem("token");
     return <Navigate to="/login" />;
   }
 };

@@ -3,6 +3,7 @@
   "name": "my-app",
   "private": true,
   "version": "0.0.0",
+  "proxy": "http://localhost:5001/",
   "type": "module",
   "scripts": {
     "dev": "vite",

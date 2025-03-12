@@ -5,7 +5,11 @@ import "../App.css";  // Import CSS
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(AuthAdapter.isAuthenticated());
+
+  // Ensure isAuthenticated is always a boolean
+  const checkAuth = () => (typeof AuthAdapter.isAuthenticated === "function" ? AuthAdapter.isAuthenticated() : false);
+  
+  const [isAuthenticated, setIsAuthenticated] = useState(checkAuth());
 
   const handleLogout = () => {
     AuthAdapter.logout();
@@ -14,7 +18,7 @@ const Navbar: React.FC = () => {
   };
 
   useEffect(() => {
-    setIsAuthenticated(AuthAdapter.isAuthenticated());
+    setIsAuthenticated(checkAuth());
   }, []);
 
   return (

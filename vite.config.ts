@@ -1,8 +1,10 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/rms-frontend/",
+  base: "/rms-frontend/",  // this matches GitHub repo name
+  define: {
+    "VITE_BASE_URL": '"/rms-frontend/"',  // Ensures proper asset paths
+  }
 });
